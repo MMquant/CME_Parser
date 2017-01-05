@@ -1,0 +1,3 @@
+REFERENCES for /Users/admin/Documents/Trading/Exchange_list/FOREX
+
+FOREX_products.csv > futures_symbol_generator.m

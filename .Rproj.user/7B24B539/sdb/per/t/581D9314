@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "## Connection\ndrv <- dbDriver(\"PostgreSQL\")\n# con <- dbConnect(drv) # default connection for localhost\ncon <- dbConnect(drv,\n                 dbname = \"cme_data\",\n                 host = \"192.168.88.202\",\n                 port = 5432,\n                 user = \"r_client\",\n                 password = \"cauneasi54Ahoj\")\n\n## Create tables\nfileName <- \"DBqueries/create_tables.sql\"\nquery <- readChar(fileName, file.info(fileName)$size)\ndbExecute(con, query)\n# Create function trigger\nfileName <- \"DBqueries/update_trigger.sql\"\nquery <- readChar(fileName, file.info(fileName)$size)\ndbExecute(con, query)\n\n## Check created tables and field names\ntables <- dbListTables(con)\nfor (i in 1:length(tables)) {\n    cat(dbListFields(con, tables[i]))\n    cat(\"\\n-----------------------------------------------------------------------------\\n\")\n}\n## Disconnect\ndbDisconnect(con)",
+    "created" : 1481833149614.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2334946518",
+    "id" : "581D9314",
+    "lastKnownWriteTime" : 1482441840,
+    "last_content_update" : 1482441840935,
+    "path" : "~/Documents/R/CME_data/test.R",
+    "project_path" : "test.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,9 @@
+IB_symbol,GLOBEX_symbol,Description,CME_Settlement_file_description,Settle_file,Exchange,Product_group,Currency
+HO,HO,HEATING OIL,HO NY Harbor ULSD Futures,stlnymex.txt,NYMEX,Energy,USD
+NG,NG,HENRY HUB NATURAL GAS,NG Henry Hub Natural Gas Futures,stlnymex.txt,NYMEX,Energy,USD
+CL,CL,CRUDE OIL FUTURES,CL Light Sweet Crude Oil Futures,stlnymex.txt,NYMEX,Energy,USD
+QM,QM,E-MINI CRUDE OIL FUTURES,QM E-mini Crude Oil Futures,stlnymex.txt,NYMEX,Energy,USD
+QG,QG,E-MINI NATURAL GAS FUTURES,QG E-mini Natural Gas Futures,stlnymex.txt,NYMEX,Energy,USD
+PA,PA,PALLADIUM FUTURES,PA Palladium Futures,stlnymex.txt,NYMEX,Metals,USD
+PL,PL,PLATINUM FUTURES,PL Platinum Futures,stlnymex.txt,NYMEX,Metals,USD
+RB,RB,RBOB GASOLINE FUTURES,RB RBOB Gasoline Futures,stlnymex.txt,NYMEX,Metals,USD

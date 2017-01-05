@@ -1,0 +1,54 @@
+CME data database notes
+
+1. PostgreSQL install
+apt-get install postgresql postgresql-client
+sudo -u postgres bash
+# bash client start
+psql
+# postgres pw change
+psql: \password postgres
+# adding system user r_client
+sudo adduser r_client
+# create db user
+sudo -u postgres createuser r_client
+# create database
+createdb -O r_client cme_data
+## system user and db user must be the same to successful connect !!!
+
+2.Database connection with R
+# Enabling remote connection to the database
+sudo -u postgres bash
+locate pg_hba.conf
+nano pg_hba.conf
+# screenshot of pg_hba.conf
+# Enable database listening on port 5432
+locate postgresql.conf
+nano postgresql.conf
+# screenshot of postgresql.conf
+# reset Postgres service
+sudo service postgresql restart
+
+Podivat se na postgres R knihovny. Spojit z Rka na postgres server. Vytvorit tabulky.
+# instalace RPostgreSQL package
+install.packages("RPostgreSQL")
+# load RPostgreSQL package
+library("RPostgreSQL")
+
+# Connect to the database
+drv <- dbDriver("PostgreSQL")
+# con <- dbConnect(drv) # default connection for localhost
+con <- dbConnect(drv,
+                 dbname = "cme_data",
+                 host = "192.168.88.202",
+                 port = 5432,
+                 user = "r_client",
+                 password = "cauneasi54Ahoj")
+dbDisconnect(con)
+
+# Creating of tables. Napsat queries do souboru a zkusit vytvorit v pgadmin
+# Doplnit tabulky ! Od konce. Napsat na forum dotaz na apply cast do named char arraye
+
+-------------------------------------------------------------------
+Udelat seznam packages,
+Mam hotove loadPrices (vystup jsou lajny v listu),
+Dale pokracovat CME_dataparse.m line 87. Metoda pro update data v reportdate.log

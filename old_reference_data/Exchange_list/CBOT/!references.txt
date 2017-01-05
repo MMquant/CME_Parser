@@ -1,0 +1,4 @@
+REFERENCES for /Users/admin/Documents/Trading/Exchange_list/CBOT
+
+CBOT_contract_months_calendar.csv(:,:) > CME_dataparse.m
+CBOT_products.csv(:,[2,3,4]) > CME_dataparse.m

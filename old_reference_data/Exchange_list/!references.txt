@@ -1,0 +1,8 @@
+REFERENCES for /Users/admin/Documents/Trading/Exchange_list/
+
+stlags.txt > CME_dataparse.m
+stlcur.txt > CME_dataparse.m
+stleqt.txt > CME_dataparse.m
+stlint.txt > CME_dataparse.m
+stlnymex.txt > CME_dataparse.m
+Contract_months_map.csv > CME_dataparse.m

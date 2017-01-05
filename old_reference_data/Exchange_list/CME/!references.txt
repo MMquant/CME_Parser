@@ -1,0 +1,4 @@
+REFERENCES for /Users/admin/Documents/Trading/Exchange_list/CME
+
+CME_contract_months_calendar.csv(:,:) > CME_dataparse.m
+CME_products.csv(:,[2,3,4]) > CME_dataparse.m

@@ -1,0 +1,18 @@
+IB_symbol,GLOBEX_symbol,Description,CME_Settlement_file_description,Settle_file,Exchange,Product_group,Currency
+ZN,ZN,10 YEAR US TREASURY NOTE,TYF 10 YEAR US TREASURY NOTE FUTURES,stlint.txt,CBOT,Interest rate,USD
+ZT,ZT,2 YEAR US TREASURY NOTE,TU 2 YEAR US TREASURY NOTE FUTURES,stlint.txt,CBOT,Interest rate,USD
+ZQ,ZQ,30 DAY FED FUNDS,FF 30 DAY FED FUNDS FUTURES,stlint.txt,CBOT,Interest rate,USD
+ZB,ZB,30 YEAR US TREASURY BOND,US 30 YEAR US TREASURY BOND FUTURES,stlint.txt,CBOT,Interest rate,USD
+ZF,ZF,5 YEAR US TREASURY NOTE,FV 5 YEAR US TREASURY NOTE FUTURES,stlint.txt,CBOT,Interest rate,USD
+ZC,ZC,CORN FUTURES,C Corn Futures,stlags.txt,CBOT,Agriculture,USD
+JR,RX,DOW JONES US REAL ESTATE INDEX,JR Dow Jones U S Real Estate Index Futures,stleqt.txt,CBOT,Equities,USD
+AC,EH,ETHANOL,ACF Ethanol Futures,stlags.txt,CBOT,Energy,USD
+KE,KE,HARD RED WINTER WHEAT-KCBOT-,KEF Kansas City Wheat Futures,stlags.txt,CBOT,Agriculture,USD
+YM,YM,MINI SIZED DOW JONES INDUSTRIAL AVERAGE $5,YM Mini-sized $5 Dow Futures,stleqt.txt,CBOT,Equities,USD
+ZO,ZO,OAT FUTURES,O Oats Futures,stlags.txt,CBOT,Agriculture,USD
+ZR,ZR,ROUGH RICE FUTURES,RRF Rough Rice Futures,stlags.txt,CBOT,Agriculture,USD
+ZS,ZS,SOYBEAN FUTURES,S Soybean Futures,stlags.txt,CBOT,Agriculture,USD
+ZM,ZM,SOYBEAN MEAL FUTURES,SM Soybean Meal Futures,stlags.txt,CBOT,Agriculture,USD
+ZL,ZL,SOYBEAN OIL FUTURES,BO Soybean Oil Futures,stlags.txt,CBOT,Agriculture,USD
+UB,UB,ULTRA TREASURY BOND,UL ULTRA 30 YEAR US TREASURY BOND FUTURES,stlint.txt,CBOT,Interest rate,USD
+ZW,ZW,WHEAT FUTURES,W Wheat Futures,stlags.txt,CBOT,Agriculture,USD
