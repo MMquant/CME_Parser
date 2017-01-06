@@ -134,6 +134,14 @@ product_group = 'Agriculture';
 currency = 'USD';
 born_year = 1961;
 
+symbol = 'RX';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = 'DOW JONES US REAL ESTATE INDEX';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2009;
+
 symbol = 'GE';
 months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
 exchange = 'CME';

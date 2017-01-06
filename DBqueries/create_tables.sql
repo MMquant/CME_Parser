@@ -35,9 +35,9 @@ CREATE TABLE daily_price
 (
   id serial PRIMARY KEY,
   data_vendor_name character varying(64) REFERENCES data_vendor(name) NOT NULL,
-  exchange_symbol character varying(32) REFERENCES symbol(instrument) NOT NULL,
+  exchange_symbol character varying(32) NOT NULL,
   vendor_symbol character varying(32) NOT NULL,
-  complete_symbol character varying(32) NOT NULL,
+  complete_symbol character varying(32) REFERENCES symbol(instrument) NOT NULL,
   contract_month character varying(32) NOT NULL,
   price_date date NOT NULL,
   open_price double precision,
@@ -48,5 +48,6 @@ CREATE TABLE daily_price
   volume integer,
   open_interest integer,
   created timestamp without time zone NOT NULL DEFAULT now(),
-  modified timestamp without time zone DEFAULT now()
+  modified timestamp without time zone DEFAULT now(),
+  UNIQUE (complete_symbol, price_date)
 );

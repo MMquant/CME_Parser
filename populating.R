@@ -1,4 +1,7 @@
 ### Connection
+library(DBI)
+library(RPostgreSQL)
+
 drv <- dbDriver("PostgreSQL")
 # con <- dbConnect(drv) # default connection for localhost
 con <- dbConnect(drv,

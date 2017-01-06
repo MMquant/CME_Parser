@@ -26,6 +26,11 @@ Parser <- R6Class(
                 "data/NYMEX_products.csv",
                 "data/COMEX_products.csv"
             )
+            private$db <- list(dbname = "cme_data",
+                               host = NA,
+                               port = NA,
+                               user = 'r_client',
+                               password = NA)
         },
         ## Accessors
         get = function(attrib) { 
@@ -38,21 +43,18 @@ Parser <- R6Class(
                    "completeSymbs" = return(private$completeSymbs),
                    "reportDate" = return(private$reportDate),
                    "queryRows" = return(private$queryRows),
-                   "Valid attributes are: logfile, reportDatePath, contractsCalPath, pricesPath, completeSymbs, reportDate, queryRows"
+                   "db" = return(private$db),
+                   "Valid attributes are: logfile, reportDatePath, contractsCalPath,
+                   pricesPath, completeSymbs, reportDate, queryRows, db"
             )
         },
         set = function(attrib, value) { 
             switch(attrib,
                    "logFile" = private$logFile <- value,
                    "reportDatePath" = private$reportDatePath <- value,
-                   "Valid attributes are: logFile, reportDatePath"
+                   "db" = private$db[c(2,3,5)] <- value,
+                   "Valid attributes are: logFile, reportDatePath, db(argument is list(hostIP,port,password))"
             )
-        },
-        # Temporary test function for calling private methods
-        privFun = function() {
-            private$symbGen()
-            # private$loadContCal()
-            # private$loadPrices()
         },
         # Other methods
         parse = function() {
@@ -60,6 +62,32 @@ Parser <- R6Class(
             private$checkDate() # Checks last vs. current report date
             private$symbGen() # Generates symbols for parse and insert to database
             private$sqlQuery() # Generates SQL query rows
+        },
+        # Exports data to database
+        exportQuery = function() {
+            drv <- dbDriver("PostgreSQL")
+            # con <- dbConnect(drv) # default connection for localhost
+            if (anyNA(private$db)) {
+                return("Set db$host, db$port and db$password before query export. Example p$set(db,list(\"192.168.0.1\",5432,\"pass\")")
+            }
+            con <- dbConnect(drv,
+                             dbname = private$db$dbname,
+                             host = private$db$host,
+                             port = private$db$port,
+                             user = private$db$user,
+                             password = private$db$password)
+            
+            # Query construction
+            q1 <- apply(private$queryRows, 1, paste, collapse = ", ")
+            q2 <- gsub("^(.*)$", "(\\1),", q1)
+            q2[[length(q2)]] <- sub(",$",";",q2[[length(q2)]])
+            q2 <- c("INSERT INTO daily_price(data_vendor_name,exchange_symbol,vendor_symbol,
+                    complete_symbol,contract_month,price_date,open_price,high_price,low_price,
+                    last_price,settle,volume,open_interest) VALUES",q2)
+            q3 <- paste(q2, collapse = "\n")
+            write(q3,"q3Output.txt")
+            dbExecute(con, q3)
+            dbDisconnect(con)
         }
         
     ),
@@ -77,15 +105,17 @@ Parser <- R6Class(
         prices = list(),
         completeSymbs = list(),
         queryRows = data.table(),
+        # DB connection settings
+        db = list(),
         
         ## Private methods
-        # Loads contracts month calendar
+        # Loads contracts month calendar.
         loadContCal = function() {
             for (cal in 1:length(private$contractsCalPath))
                 private$contractsCal[[cal]] <- fread(private$contractsCalPath[[cal]], header = T, sep = ',')
         },
         # Download data
-        # Loads downloaded price files without options data
+        # Loads downloaded price files without options data.
         loadPrices = function() {
             # 1 data/stlags.txt
             # 2 data/stlcomex.txt
@@ -107,7 +137,7 @@ Parser <- R6Class(
             private$prices <- l
             names(private$prices) <- c("stlags.txt", "stlcomex.txt", "stleqt.txt", "stlint.txt", "stlnymex.txt")
         },
-        # Checks and updates report date file
+        # Checks and updates report date file.
         checkDate = function() {
             # Last report date
             conOld  <- file(private$reportDatePath, open = "r+")
@@ -129,7 +159,7 @@ Parser <- R6Class(
                 close(conNew)
             }
         },
-        # Core logic for selecting correct symbols according to the contract months calendar(CMC)
+        # Core logic for selecting correct symbols according to the contract months calendar(CMC).
         symbGen = function() {
             # Enumerate contract months and days according to the CMC
             private$loadContCal()
@@ -223,7 +253,7 @@ Parser <- R6Class(
             }
             private$completeSymbs <- completeSymbs
         },
-        # Generates SQL query
+        # Generates SQL query.
         sqlQuery = function() {
             # daily_price table columns:
             # data_vendor_name,exchange_symbol,vendor_symbol,complete_symbol,contract_month,price_date,O,H,L,Last,Settle,Volume,OI,created,modified
@@ -231,7 +261,6 @@ Parser <- R6Class(
             data_vendor_name <- as.matrix(rep("CME",times = length(complete_symbol)))
             exchange_symbol <- as.matrix(str_match(complete_symbol,"^([A-Z]+)[A-Z]")[,2])
             vendor_symbol <- exchange_symbol
-            
             # contract_month in the form MMMYY
             y <- as.matrix(str_extract(complete_symbol,"\\d{2}"))
             mSymb <- as.matrix(str_match(complete_symbol,"([A-Z])\\d{2}")[,2])
@@ -290,8 +319,10 @@ Parser <- R6Class(
                                             Settle = OHLCV[,5],
                                             Volume = OHLCV[,6],
                                             OpenInterest = OHLCV[,7])
+            # Single quote strings
+            private$queryRows[,1:6] <- lapply(private$queryRows[,1:6], function(x) { gsub("^(.*)$", "'\\1'", x) })
         },
-        # Conversion function handles fractional prices in settlement file. Called by sqlQuery
+        # Conversion function converts fractional prices in settlement file. Called by sqlQuery.
         frac2float = function(OHLCSfrac, group) {
             # OHLCSfrac is just 1x5 matrix ! To be called with apply
             # OHLCSfrac - Open, High, Low, Close, Settle
