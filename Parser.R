@@ -30,7 +30,21 @@ Parser <- R6Class(
                                host = NA,
                                port = NA,
                                user = 'r_client',
-                               password = NA)
+                               password = NA
+            )
+            private$dlUrl <- c("ftp://ftp.cmegroup.com/pub/settle/stlint",
+                               "ftp://ftp.cmegroup.com/pub/settle/stleqt",
+                               "ftp://ftp.cmegroup.com/pub/settle/stlags",
+                               "ftp://ftp.cmegroup.com/pub/settle/stlnymex",
+                               "ftp://ftp.cmegroup.com/settle/stlcomex"
+            )
+            private$destFile <- c("data/stlint.txt",
+                                  "data/stleqt.txt",
+                                  "data/stlags.txt",
+                                  "data/stlnymex.txt",
+                                  "data/stlcomex.txt"
+            )
+
         },
         ## Accessors
         get = function(attrib) { 
@@ -44,8 +58,10 @@ Parser <- R6Class(
                    "reportDate" = return(private$reportDate),
                    "queryRows" = return(private$queryRows),
                    "db" = return(private$db),
+                   "dlUrl" = return(private$dlUrl),
+                   "destFile" = return(private$destFile),
                    "Valid attributes are: logfile, reportDatePath, contractsCalPath,
-                   pricesPath, completeSymbs, reportDate, queryRows, db"
+                   pricesPath, completeSymbs, reportDate, queryRows, db, dlUrl, destFile"
             )
         },
         set = function(attrib, value) { 
@@ -58,10 +74,14 @@ Parser <- R6Class(
         },
         # Other methods
         parse = function() {
+            private$dlData() # Downloads data
             private$loadPrices() # Loads downloaded prices
             private$checkDate() # Checks last vs. current report date
             private$symbGen() # Generates symbols for parse and insert to database
             private$sqlQuery() # Generates SQL query rows
+        },
+        testFunc = function() {
+            private$dlData() # Downloads data
         },
         # Exports data to database
         exportQuery = function() {
@@ -105,6 +125,8 @@ Parser <- R6Class(
         prices = list(),
         completeSymbs = list(),
         queryRows = data.table(),
+        dlUrl = NA,
+        destFile = NA,
         # DB connection settings
         db = list(),
         
@@ -114,7 +136,11 @@ Parser <- R6Class(
             for (cal in 1:length(private$contractsCalPath))
                 private$contractsCal[[cal]] <- fread(private$contractsCalPath[[cal]], header = T, sep = ',')
         },
-        # Download data
+        # Downloads data
+        dlData = function () {
+            destfile <- c("stlint.txt","stleqt.txt","stlags.txt","stlnymex.txt","stlcomex.txt")
+            download.file(private$dlUrl, private$destFile, method = "libcurl", quiet = FALSE, mode = "w", cacheOK = TRUE)
+        },
         # Loads downloaded price files without options data.
         loadPrices = function() {
             # 1 data/stlags.txt
@@ -321,6 +347,8 @@ Parser <- R6Class(
                                             OpenInterest = OHLCV[,7])
             # Single quote strings
             private$queryRows[,1:6] <- lapply(private$queryRows[,1:6], function(x) { gsub("^(.*)$", "'\\1'", x) })
+            # '---' values to 0
+            private$queryRows[,7:13] <- lapply(private$queryRows[,7:13], function(x) { str_replace(x,"----","0") })
         },
         # Conversion function converts fractional prices in settlement file. Called by sqlQuery.
         frac2float = function(OHLCSfrac, group) {
