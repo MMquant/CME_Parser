@@ -1,3 +1,0 @@
-curl "ftp://ftp.cmegroup.com/pub/settle/{stlint,stleqt,stlags,stlcur,stlnymex}" -o "/Users/admin/Documents/Trading/Exchange_list/#1.txt"
-curl "ftp://ftp.cmegroup.com/settle/stlcomex" -o "/Users/admin/Documents/Trading/Exchange_list/stlcomex.txt"
-ZKONTROLOVAT UVOZOVKY!!!

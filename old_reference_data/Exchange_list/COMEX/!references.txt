@@ -1,4 +1,0 @@
-REFERENCES for /Users/admin/Documents/Trading/Exchange_list/COMEX
-
-COMEX_contract_months_calendar.csv(:,:) > CME_dataparse.m
-COMEX_products.csv(:,[2,3,4]) > CME_dataparse.m

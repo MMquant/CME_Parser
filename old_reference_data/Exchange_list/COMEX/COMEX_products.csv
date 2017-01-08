@@ -1,5 +1,0 @@
-IB_symbol,GLOBEX_symbol,Description,CME_Settlement_file_description,Settle_file,Exchange,Product_group,Currency
-MGC,MGC,E-MICRO GOLD,MGC E-micro Gold Futures,stlcomex.txt,COMEX,Metals,USD
-GC,GC,GOLD,GC Gold Futures,stlcomex.txt,COMEX,Metals,USD
-HG,HG,COPPER FUTURES,HG Copper Futures,stlcomex.txt,COMEX,Metals,USD
-SI,SI,SILVER FUTURES,SI Silver Futures,stlcomex.txt,COMEX,Metals,USD

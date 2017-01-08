@@ -74,14 +74,12 @@ Parser <- R6Class(
         },
         # Other methods
         parse = function() {
+            private$logTime() # Logs parser execution
             private$dlData() # Downloads data
             private$loadPrices() # Loads downloaded prices
             private$checkDate() # Checks last vs. current report date
             private$symbGen() # Generates symbols for parse and insert to database
             private$sqlQuery() # Generates SQL query rows
-        },
-        testFunc = function() {
-            private$dlData() # Downloads data
         },
         # Exports data to database
         exportQuery = function() {
@@ -105,7 +103,7 @@ Parser <- R6Class(
                     complete_symbol,contract_month,price_date,open_price,high_price,low_price,
                     last_price,settle,volume,open_interest) VALUES",q2)
             q3 <- paste(q2, collapse = "\n")
-            write(q3,"q3Output.txt")
+            write(q3,"log/lastQuery.txt")
             dbExecute(con, q3)
             dbDisconnect(con)
         }
@@ -127,6 +125,7 @@ Parser <- R6Class(
         queryRows = data.table(),
         dlUrl = NA,
         destFile = NA,
+        maxDlTries = 5,
         # DB connection settings
         db = list(),
         
@@ -138,8 +137,18 @@ Parser <- R6Class(
         },
         # Downloads data
         dlData = function () {
+            cat("Downloading data:....")
             destfile <- c("stlint.txt","stleqt.txt","stlags.txt","stlnymex.txt","stlcomex.txt")
-            download.file(private$dlUrl, private$destFile, method = "libcurl", quiet = FALSE, mode = "w", cacheOK = TRUE)
+            t <- 0
+            repeat {
+                tryOut <- try(
+                    download.file(private$dlUrl, private$destFile, method = "libcurl", quiet = TRUE, mode = "w", cacheOK = TRUE))
+                t <- t+1
+                if(!grepl(class(tryOut),"try-error") || t >= private$maxDlTries) {
+                    break
+                }
+            }
+            cat(" OK\n")
         },
         # Loads downloaded price files without options data.
         loadPrices = function() {
@@ -148,6 +157,7 @@ Parser <- R6Class(
             # 3 data/stleqt.txt
             # 4 data/stlint.txt
             # 5 data/stlnymex.txt
+            cat("Loading settlement files:")
             l <- vector("list",5)
             i <- 1
             for (f in private$pricesPath) {
@@ -159,12 +169,15 @@ Parser <- R6Class(
                 }
                 close(con)
                 i <- i+1
+                cat(".")
             }
             private$prices <- l
             names(private$prices) <- c("stlags.txt", "stlcomex.txt", "stleqt.txt", "stlint.txt", "stlnymex.txt")
+            cat(" OK\n")
         },
         # Checks and updates report date file.
         checkDate = function() {
+            cat("Checking settlement reports date:...")
             # Last report date
             conOld  <- file(private$reportDatePath, open = "r+")
             dOld <- readLines(conOld, n = 1)
@@ -176,6 +189,7 @@ Parser <- R6Class(
             if (grepl(dOld,dNew)) {
                 close(conOld)
                 close(conNew)
+                write("Report dates are equal. Stopping parser.", "log/dataparse.log" , append = TRUE)
                 stop("Report dates are equal. Stopping parser.")
             }
             else {
@@ -183,10 +197,12 @@ Parser <- R6Class(
                 writeLines(dNew,conOld)
                 close(conOld)
                 close(conNew)
+                cat(" OK\n")
             }
         },
         # Core logic for selecting correct symbols according to the contract months calendar(CMC).
         symbGen = function() {
+            cat("Generating symbols for download:.")
             # Enumerate contract months and days according to the CMC
             private$loadContCal()
             tDay <- as.numeric(unlist(strsplit(private$reportDate,"/")))[2]
@@ -223,6 +239,7 @@ Parser <- R6Class(
                         dlSymbsId[[exchange]][length(dlSymbsId[[exchange]]) + 1] <- r
                     }
                 }
+                cat(".")
                 # Append trading year to symbols.
                 # Leap symbol is symbol which is downloaded over the 1st January (in CMC Start_month > End_month).
                 # If we are in months 1:5 we append current year to all leap symbols.
@@ -257,7 +274,7 @@ Parser <- R6Class(
                 }
                 noLeapDlSymbs <- setdiff(dlSymbs[[exchange]], leapDlSymbs[[exchange]])
                 noLp <- paste(noLeapDlSymbs, tYear, sep = "")
-                
+                cat(".")
                 if (length(leapDlSymbs[[exchange]]) > 0 && length(noLeapDlSymbs) > 0) {
                     if (tMonth %in% 1:7) {
                         lp <- paste(leapDlSymbs[[exchange]], tYear, sep = "")
@@ -277,10 +294,13 @@ Parser <- R6Class(
                 } else
                     completeSymbs[[exchange]] <- noLp
             }
+            write(paste("Downloaded symbols:",length(completeSymbs)), "log/dataparse.log", append = TRUE)
             private$completeSymbs <- completeSymbs
+            cat(". OK\n")
         },
         # Generates SQL query.
         sqlQuery = function() {
+            cat("Generating SQL query rows:.")
             # daily_price table columns:
             # data_vendor_name,exchange_symbol,vendor_symbol,complete_symbol,contract_month,price_date,O,H,L,Last,Settle,Volume,OI,created,modified
             complete_symbol <- as.matrix(unlist(private$completeSymbs))
@@ -303,6 +323,7 @@ Parser <- R6Class(
                 prodMap <- rbind(prodMap,fread(private$productMapPath[[f]]), fill = TRUE)
             ids <- match(exchange_symbol,as.matrix(prodMap[,2]))
             currentProdMap <- prodMap[ids,]
+            cat(".")
             # OHLCVI matrix  
             OHLCV <- matrix(nrow = nrow(currentProdMap), ncol = 7)
             colnames(OHLCV) <- c("O","H","L","Last","Settle","V","OI")
@@ -318,6 +339,7 @@ Parser <- R6Class(
                 data <- unlist(str_extract_all(data,"[^\\s]+"))
                 OHLCV[r,1:7] <- data[c(2,3,4,5,6,8,10)]
             }
+            cat(".")
             # Cleaning the OHLCV matrix and conversion to double
             OHLCV <- sub("([.]*)([AB])$", "\\1", OHLCV)
             # Sorting out fraction values as follows:
@@ -330,6 +352,7 @@ Parser <- R6Class(
             # return(list(G1Id = G1Id, G2Id = G2Id, G1 = G1, G2 = G2, OHLCV = OHLCV)) debug
             OHLCV[G1Id,1:5] <- G1
             OHLCV[G2Id,1:5] <- G2
+            cat(".")
             # daily_price table columns:
             # data_vendor_name,exchange_symbol,vendor_symbol,complete_symbol,contract_month,price_date,O,H,L,Last,Settle,Volume,OI,created,modified
             private$queryRows <- data.table(data_vendor_name = data_vendor_name,
@@ -345,10 +368,18 @@ Parser <- R6Class(
                                             Settle = OHLCV[,5],
                                             Volume = OHLCV[,6],
                                             OpenInterest = OHLCV[,7])
+            cat(".")
             # Single quote strings
             private$queryRows[,1:6] <- lapply(private$queryRows[,1:6], function(x) { gsub("^(.*)$", "'\\1'", x) })
             # '---' values to 0
             private$queryRows[,7:13] <- lapply(private$queryRows[,7:13], function(x) { str_replace(x,"----","0") })
+            cat(".")
+            cat(" OK\n")
+        },
+        # Logs system time to logfile
+        logTime = function() {
+            t <- paste("-------------------------------------------------------\n",as.character(Sys.time()), sep = "")
+            write(t, private$logFile, append = TRUE)
         },
         # Conversion function converts fractional prices in settlement file. Called by sqlQuery.
         frac2float = function(OHLCSfrac, group) {
