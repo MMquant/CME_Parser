@@ -294,7 +294,7 @@ Parser <- R6Class(
                 } else
                     completeSymbs[[exchange]] <- noLp
             }
-            write(paste("Downloaded symbols:",length(completeSymbs)), "log/dataparse.log", append = TRUE)
+            write(paste("Downloaded symbols:",length(unlist(completeSymbs))), "log/dataparse.log", append = TRUE)
             private$completeSymbs <- completeSymbs
             cat(". OK\n")
         },
