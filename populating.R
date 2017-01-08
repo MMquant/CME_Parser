@@ -6,7 +6,7 @@ drv <- dbDriver("PostgreSQL")
 # con <- dbConnect(drv) # default connection for localhost
 con <- dbConnect(drv,
                  dbname = "cme_data",
-                 host = "192.168.88.202",
+                 host = "192.168.88.202", # use PSQL server IP or "localhost"
                  port = 5432,
                  user = "r_client",
                  password = "yourPassword")
