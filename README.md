@@ -8,6 +8,13 @@ This project deals with CME settlement files parse and uploads parsed data to Po
 
 Installation and database initialization is covered in my blog post http://mmquant.net/open-source-database-solution-for-daily-data-in-r/.
 
+## Warning
+
+This parser is intended to be an educational project. Use of CME settlement files for any other purposes without CME
+permission is forbidden. If you want to use this project in real world application you have to use other source of daily
+prices or contact CME about your intentions. Note that in practice analysts have prices coming from multiple data vendors
+so they can cross-check their accuracy.
+
 ## Project structure overview
 
 DBqueries directory contains sql statements for creating and populating foreign key tables. 
