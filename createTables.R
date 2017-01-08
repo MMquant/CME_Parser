@@ -19,7 +19,6 @@ dbExecute(con, query)
 fileName <- "DBqueries/update_trigger.sql"
 query <- readChar(fileName, file.info(fileName)$size)
 dbExecute(con, query)
-
 ## Check created tables and field names
 tables <- dbListTables(con)
 for (i in 1:length(tables)) {
