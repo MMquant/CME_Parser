@@ -6,7 +6,7 @@ con <- dbConnect(drv,
                  host = "192.168.88.202",
                  port = 5432,
                  user = "r_client",
-                 password = "cauneasi54Ahoj")
+                 password = "yourPassword")
 
 ## Create tables
 fileName <- "DBqueries/create_tables.sql"
@@ -25,4 +25,4 @@ for (i in 1:length(tables)) {
 }
 
 ## Disconnect
-#dbDisconnect(con)
+dbDisconnect(con)
