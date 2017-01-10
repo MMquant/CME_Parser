@@ -23,6 +23,12 @@ CreateTables.R, populating.R, tables_Triggers.R scripts
 connects to the existing postgres database and execute sql queries from DBqueries directory. qGen.R generates input
 rows for _symbol_ table.
 
+## Contract months calendar maps (CMC)
+
+In data directory there are CMC maps for every exchange which are used as guide for parser which symbols it downloads. Every CMC
+file consists of _GLOBEX_symbol_, _Start_month_, _End_month_, _Start_day_ and _End_day_. You are free modify all of the columns except _Start_day_.
+
+
 ## Parser R6 Class overview and examples
 
 - Public methods:
