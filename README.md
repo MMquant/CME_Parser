@@ -8,7 +8,7 @@ This project deals with CME settlement files parse and uploads parsed data to Po
 
 Installation and database initialization is covered in my blog post http://mmquant.net/open-source-database-solution-for-daily-data-in-r/.
 
-## Warning
+## Notice
 
 This parser is intended to be an educational project. Use of CME settlement files for any other purposes without CME
 permission is forbidden. If you want to use this project in real world application you have to use other source of daily
@@ -65,6 +65,9 @@ p$exportQuery()
 | _reportDatePath_ | Path to last report date log file |
 | _db_ | Sets database connection settings - list(dbname, host, port, password) |
 
+
+## Possible upgrades
+* Add different historical data sources
 
 ## Contributors
 
