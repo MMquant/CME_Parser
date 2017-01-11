@@ -1,0 +1,431 @@
+symbol = 'ZN';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = '10 YEAR US TREASURY NOTE';
+product_group = 'Interest rate';
+currency = 'USD';
+born_year = 1983;
+
+symbol = 'ZT';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = '2 YEAR US TREASURY NOTE';
+product_group = 'Interest rate';
+currency = 'USD';
+born_year = 1991;
+
+symbol = 'ZB';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = '30 YEAR US TREASURY BOND';
+product_group = 'Interest rate';
+currency = 'USD';
+born_year = 1978;
+
+symbol = 'ZF';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = '5 YEAR US TREASURY NOTE';
+product_group = 'Interest rate';
+currency = 'USD';
+born_year = 1989;
+
+symbol = 'JR';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = 'DOW JONES US REAL ESTATE INDEX';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'YM';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = 'MINI SIZED DOW JONES INDUSTRIAL AVERAGE';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2012;
+
+symbol = 'UB';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = 'ULTRA TREASURY BOND';
+product_group = 'Interest rate';
+currency = 'USD';
+born_year = 2013;
+
+symbol = 'ZQ';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'CBOT';
+name = '30 DAY FED FUNDS';
+product_group = 'Interest rate';
+currency = 'USD';
+born_year = 1989;
+
+symbol = 'EH';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'CBOT';
+name = 'ETHANOL';
+product_group = 'Energy';
+currency = 'USD';
+born_year = 2012;
+
+symbol = 'ZC';
+months = {'H','K','N','U','Z'};
+exchange = 'CBOT';
+name = 'CORN FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1960;
+
+symbol = 'KE';
+months = {'H','K','N','U','Z'};
+exchange = 'CBOT';
+name = 'HARD RED WINTER WHEAT';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1977;
+
+symbol = 'ZO';
+months = {'H','K','N','U','Z'};
+exchange = 'CBOT';
+name = 'OAT FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1970;
+
+symbol = 'ZW';
+months = {'H','K','N','U','Z'};
+exchange = 'CBOT';
+name = 'WHEAT FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1960;
+
+symbol = 'ZR';
+months = {'F','H','K','N','U','X'};
+exchange = 'CBOT';
+name = 'ROUGH RICE FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1987;
+
+symbol = 'ZS';
+months = {'F','H','K','N','Q','U','X'};
+exchange = 'CBOT';
+name = 'SOYBEAN FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1970;
+
+symbol = 'ZM';
+months = {'F','H','K','N','Q','U','V','Z'};
+exchange = 'CBOT';
+name = 'SOYBEAN MEAL FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1964;
+
+symbol = 'ZL';
+months = {'F','H','K','N','Q','U','V','Z'};
+exchange = 'CBOT';
+name = 'SOYBEAN OIL FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1961;
+
+symbol = 'RX';
+months = {'H','M','U','Z'};
+exchange = 'CBOT';
+name = 'DOW JONES US REAL ESTATE INDEX';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2009;
+
+symbol = 'GE';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'CME';
+name = 'GLOBEX EURO-DOLLAR';
+product_group = 'Interest rate';
+currency = 'USD';
+born_year = 1982;
+
+symbol = 'CSC';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'CME';
+name = 'CASH SETTLED CHEESE';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'CB';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'CME';
+name = 'CASH-SETTLED BUTTER FUTURES';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'DY';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'CME';
+name = 'DRY WHEY INDEX';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'NKD';
+months = {'H','M','U','Z'};
+exchange = 'CME';
+name = 'NIKKEI 225 INDEX';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 1991;
+
+symbol = 'NQ';
+months = {'H','M','U','Z'};
+exchange = 'CME';
+name = 'E-MINI NASDAQ 100 FUTURES';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2000;
+
+symbol = 'ES';
+months = {'H','M','U','Z'};
+exchange = 'CME';
+name = 'E-MINI S&P 500 FUTURES';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 1998;
+
+symbol = 'EMD';
+months = {'H','M','U','Z'};
+exchange = 'CME';
+name = 'E-MINI S&P MIDCAP 400 FUTURES';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2013;
+
+symbol = 'GF';
+months = {'F','H','J','K','Q','U','V','X'};
+exchange = 'CME';
+name = 'FEEDER CATTLE';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1975;
+
+symbol = 'HE';
+months = {'G','J','K','M','N','Q','V','Z'};
+exchange = 'CME';
+name = 'LEAN HOGS';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1970;
+
+symbol = 'LE';
+months = {'G','J','M','Q','V','Z'};
+exchange = 'CME';
+name = 'LIVE CATTLE';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1966;
+
+symbol = 'DC';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'CME';
+name = 'MILK CLASS III INDEX';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 2011;
+
+symbol = 'LBS';
+months = {'F','H','K','N','U','X'};
+exchange = 'CME';
+name = 'RANDOM LENGTH LUMBER';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1974;
+
+symbol = 'SP';
+months = {'H','M','U','Z'};
+exchange = 'CME';
+name = 'S&P 500 STOCK INDEX';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 1983;
+
+symbol = 'ECO';
+months = {'G','K','Q','X'};
+exchange = 'NV';
+name = 'RAPESEED FUTURE';
+product_group = 'Agriculture';
+currency = 'EUR';
+born_year = 2014;
+
+symbol = 'EBM';
+months = {'F','H','K','U','Z'};
+exchange = 'NV';
+name = 'MILLING WHEAT FUTURES';
+product_group = 'Agriculture';
+currency = 'EUR';
+born_year = 2013;
+
+symbol = 'FCE';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'NV';
+name = 'CAC40 INDEX';
+product_group = 'Equities';
+currency = 'EUR';
+born_year = 1999;
+
+symbol = 'TT';
+months = {'H','K','N','V','Z'};
+exchange = 'NYMEX';
+name = 'COTTON';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1972;
+
+symbol = 'YO';
+months = {'H','K','N','V'};
+exchange = 'NYMEX';
+name = 'SUGAR NO. 11';
+product_group = 'Agriculture';
+currency = 'USD';
+born_year = 1964;
+
+symbol = 'MGC';
+months = {'G','J','M','Q','V','Z'};
+exchange = 'NYMEX';
+name = 'E-MICRO GOLD';
+product_group = 'Metals';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'GC';
+months = {'G','J','M','Q','V','Z'};
+exchange = 'NYMEX';
+name = 'GOLD';
+product_group = 'Metals';
+currency = 'USD';
+born_year = 1975;
+
+symbol = 'HO';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'NYMEX';
+name = 'HEATING OIL';
+product_group = 'Energy';
+currency = 'USD';
+born_year = 1980;
+
+symbol = 'NG';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'NYMEX';
+name = 'HENRY HUB NATURAL GAS';
+product_group = 'Energy';
+currency = 'USD';
+born_year = 1991;
+
+symbol = 'CL';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'NYMEX';
+name = 'LIGHT SWEET CRUDE OIL';
+product_group = 'Energy';
+currency = 'USD';
+born_year = 1984;
+
+symbol = 'HG';
+months = {'H','K','N','U','Z'};
+exchange = 'NYMEX';
+name = 'COPPER';
+product_group = 'Metals';
+currency = 'USD';
+born_year = 1960;
+
+symbol = 'QM';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'NYMEX';
+name = 'MINY LIGHT SWEET CRUDE OIL INDEX';
+product_group = 'Energy';
+currency = 'USD';
+born_year = 2015;
+
+symbol = 'QG';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'NYMEX';
+name = 'MINY NATURAL GAS INDEX';
+product_group = 'Energy';
+currency = 'USD';
+born_year = 2015;
+
+symbol = 'RB';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'NYMEX';
+name = 'RBOB GASOLINE INDEX';
+product_group = 'Energy';
+currency = 'USD';
+born_year = 2006;
+
+symbol = 'PA';
+months = {'H','M','U','Z'};
+exchange = 'NYMEX';
+name = 'PALLADIUM';
+product_group = 'Metals';
+currency = 'USD';
+born_year = 1977;
+
+symbol = 'PL';
+months = {'F','J','N','V'};
+exchange = 'NYMEX';
+name = 'PLATINUM';
+product_group = 'Metals';
+currency = 'USD';
+born_year = 1970;
+
+symbol = 'SI';
+months = {'H','K','N','U','Z'};
+exchange = 'NYMEX';
+name = 'SILVER';
+product_group = 'Metals';
+currency = 'USD';
+born_year = 1965;
+
+symbol = 'IN';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'SGX';
+name = 'CNX NIFTY INDEX';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'CN';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'SGX';
+name = 'FTSE China A50 Index Futures';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'SG';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'SGX';
+name = 'MSCI SINGAPORE FREE INDEX';
+product_group = 'Equities';
+currency = 'SGD';
+born_year = 2014;
+
+symbol = 'TW';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'SGX';
+name = 'MSCI TAIWAN INDEX';
+product_group = 'Equities';
+currency = 'USD';
+born_year = 2014;
+
+symbol = 'TF';
+months = {'F','G','H','J','K','M','N','Q','U','V','X','Z'};
+exchange = 'SGX';
+name = 'TSR20 SICOM RUBBER';
+product_group = 'Others';
+currency = 'USD';
+born_year = 2014;
