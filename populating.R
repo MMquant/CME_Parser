@@ -23,7 +23,7 @@ dbExecute(con, query)
 
 ### Populating symbol_table
 ## Input file parse
-out <- readLines("symbols.txt")
+out <- readLines("data/symbols.txt")
 out1 <- gsub("[;'{}]", "", out[out != ""], fixed = FALSE)
 out2 <- strsplit(out1," = ")
 
