@@ -98,6 +98,7 @@ Parser <- R6Class(
             # Query construction
             q1 <- apply(private$queryRows, 1, paste, collapse = ", ")
             q2 <- gsub("^(.*)$", "(\\1),", q1)
+            q2 <- gsub("\\bNA\\b", "null", q2)
             q2[[length(q2)]] <- sub(",$",";",q2[[length(q2)]])
             q2 <- c("INSERT INTO daily_price(data_vendor_name,exchange_symbol,vendor_symbol,
                     complete_symbol,contract_month,price_date,open_price,high_price,low_price,
