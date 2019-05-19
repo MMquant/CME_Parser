@@ -348,8 +348,8 @@ Parser <- R6Class(
             # Group 2: UB, ZB, ZF, ZN, ZT have minimum tick size 1/32 or 1/64 (For example 157'27 = 157.84375, 157'20 = 157.625, ...)
             G1Id <- which(as.matrix(currentProdMap[,2]) %in% c("KE","ZC","ZO","ZS","ZW"))
             G2Id <- which(as.matrix(currentProdMap[,2]) %in% c("UB","ZB","ZF","ZN","ZT"))
-            G1 <- matrix(unlist(lapply(OHLCV[G1Id,c(1:5)], private$frac2float, 1)), ncol = 5)
-            G2 <- matrix(unlist(lapply(OHLCV[G2Id,c(1:5)], private$frac2float, 2)), ncol = 5)
+            G1 <- matrix(unlist(apply(OHLCV[G1Id,c(1:5)], MARGIN = 2, FUN = private$frac2float, group = 1)), ncol = 5)
+            G2 <- matrix(unlist(apply(OHLCV[G2Id,c(1:5)], MARGIN = 2, FUN = private$frac2float, group = 2)), ncol = 5)
             # return(list(G1Id = G1Id, G2Id = G2Id, G1 = G1, G2 = G2, OHLCV = OHLCV)) debug
             OHLCV[G1Id,1:5] <- G1
             OHLCV[G2Id,1:5] <- G2
