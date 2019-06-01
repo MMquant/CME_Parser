@@ -338,7 +338,7 @@ Parser <- R6Class(
                 # Raw line consists of:
                 # Month,Open,High,Low,Last,Settle,PCTchange,est.volume,...prior day info
                 data <- unlist(str_extract_all(data,"[^\\s]+"))
-                OHLCV[r,1:7] <- data[c(2,3,4,5,6,8,10)]
+                OHLCV[r,1:7] <- data[c(2,3,4,5,6,8,11)]
             }
             cat(".")
             # Cleaning the OHLCV matrix and conversion to double
